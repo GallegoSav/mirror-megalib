@@ -1,0 +1,27 @@
+# .github/workflows/mirror.yml
+name: 'MEGAlib mirror'
+description: 'This workflow mirrors the MEGAlib repository'
+
+on:
+  # Update the mirror when
+  # 1. this mirror branch is updates, i.e. run it immediatly on first push
+  push:
+    branches:
+      - cositools-megalib-mirror
+  # 2. on a daily schedule, every 4 hours
+  schedule:
+    - cron: '0 */4 * * *'
+  # 3. Manually from the API/CLI/UI
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    name: mirror
+    steps:
+      - name: mirror
+        id: mirror
+        uses: bridgelightcloud/github-mirror-action@v1
+        with:
+          origin: 'https://github.com/zoglauer/megalib'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
