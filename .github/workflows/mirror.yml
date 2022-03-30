@@ -3,6 +3,8 @@
 # This workflow mirrors the MEGAlib repository
 name: 'MEGAlib mirror'
 
+permissions: read-all|write-all
+
 on:
   # Update the mirror when
   # 1. this mirror branch is updates, i.e. run it immediatly on first push
@@ -22,7 +24,7 @@ jobs:
     steps:
       - name: mirror
         run: |
-          git clone --bare "https://x-access-token:${{ secrets.Mirrors }}@github.com/${GITHUB_REPOSITORY}.git" . || exit 1
+          git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" . || exit 1
           git remote add --mirror=fetch mirror "https://github.com/zoglauer/megalib" || exit 1
           git fetch mirror +refs/heads/*:refs/remotes/origin/* || exit 1
           git push --force --mirror --prune origin || exit 1
