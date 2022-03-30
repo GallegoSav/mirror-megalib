@@ -3,8 +3,6 @@
 # This workflow mirrors the MEGAlib repository
 name: 'MEGAlib mirror'
 
-permissions: read-all|write-all
-
 on:
   # Update the mirror when
   # 1. this mirror branch is updates, i.e. run it immediatly on first push
@@ -16,6 +14,8 @@ on:
     - cron: '0 */4 * * *'
   # 3. Manually from the API/CLI/UI
   workflow_dispatch:
+
+permissions: read-all|write-all
 
 jobs:
   mirror:
