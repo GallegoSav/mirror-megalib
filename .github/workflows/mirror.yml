@@ -1,6 +1,7 @@
 # .github/workflows/mirror.yml
+
+# This workflow mirrors the MEGAlib repository
 name: 'MEGAlib mirror'
-description: 'This workflow mirrors the MEGAlib repository'
 
 on:
   # Update the mirror when
