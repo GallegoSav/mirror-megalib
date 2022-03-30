@@ -15,8 +15,6 @@ on:
   # 3. Manually from the API/CLI/UI
   workflow_dispatch:
 
-permissions: read-all|write-all
-
 jobs:
   mirror:
     runs-on: ubuntu-latest
@@ -24,7 +22,7 @@ jobs:
     steps:
       - name: mirror
         run: |
-          git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" . || exit 1
+          git clone --bare "https://x-access-token:${{ secrets.MIRROR }}@github.com/${GITHUB_REPOSITORY}.git" . || exit 1
           git remote add --mirror=fetch mirror "https://github.com/zoglauer/megalib" || exit 1
           git fetch mirror +refs/heads/*:refs/remotes/origin/* || exit 1
           git push --force --mirror --prune origin || exit 1
